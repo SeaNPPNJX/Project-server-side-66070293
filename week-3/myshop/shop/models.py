@@ -15,7 +15,7 @@ class Cart(models.Model):
     expired_in = models.IntegerField(default=60)
 
     def __str__(self):
-        return f"Cart #{self.id} ของ {self.customer}"
+        return f"Cart #{self.id} - {self.customer}"
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -23,7 +23,7 @@ class Order(models.Model):
     remark = models.TextField(null=True)
 
     def __str__(self):
-        return f"Order #{self.id} ของ {self.customer}"
+        return f"Order #{self.id} - {self.customer}"
 
 class ProductCategory(models.Model):
     name = models.CharField(max_length=150)
@@ -47,7 +47,7 @@ class CartItem(models.Model):
     amount = models.IntegerField(default=1)
 
     def __str__(self):
-        return f"{self.amount} x {self.product.name} ใน {self.cart}"
+        return f"{self.amount} x {self.product.name} in {self.cart}"
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
@@ -55,7 +55,7 @@ class OrderItem(models.Model):
     amount = models.IntegerField(default=1)
 
     def __str__(self):
-        return f"{self.amount} x {self.product.name} ใน {self.order}"
+        return f"{self.amount} x {self.product.name} in {self.order}"
 
 class Payment(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE)
@@ -65,7 +65,7 @@ class Payment(models.Model):
     discount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
-        return f"Payment #{self.id} สำหรับ {self.order}"
+        return f"Payment #{self.id} for {self.order}"
 
 class PaymentItem(models.Model):
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
@@ -91,4 +91,4 @@ class PaymentMethod(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return f"{self.method} - {self.price} บาท (Payment #{self.payment.id})"
+        return f"{self.method} - {self.price} baht (Payment #{self.payment.id})"
