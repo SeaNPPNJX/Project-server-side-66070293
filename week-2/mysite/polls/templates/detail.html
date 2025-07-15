@@ -1,0 +1,15 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <h1>{{question.question_text}}</h1>
+        <p>Published date: {{question.pub_date}}</p>
+        <ul>
+            {% for choice in question.choice_set.all %}
+                <li>{{ choice.choice_text }} ({{ choice.votes }} votes)</li>
+            {% empty %}
+                <li>No choices available.</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
