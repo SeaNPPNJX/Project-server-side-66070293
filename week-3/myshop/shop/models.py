@@ -3,7 +3,7 @@ from django.db import models
 class Customer(models.Model):
     first_name = models.CharField(max_length=150)
     last_name = models.CharField(max_length=200)
-    email = models.CharField(max_length=150)
+    email = models.EmailField(max_length=150)
     address = models.JSONField(null=True)
 
     def __str__(self):
@@ -58,7 +58,7 @@ class OrderItem(models.Model):
         return f"{self.amount} x {self.product.name} in {self.order}"
 
 class Payment(models.Model):
-    order = models.OneToOneField(Order, on_delete=models.CASCADE)
+    order = models.OneToOneField(Order, on_delete=models.PROTECT)
     payment_date = models.DateTimeField('date payment')
     remark = models.TextField(null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -69,7 +69,7 @@ class Payment(models.Model):
 
 class PaymentItem(models.Model):
     payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
-    order_item = models.OneToOneField(OrderItem, on_delete=models.PROTECT)
+    order_item = models.OneToOneField(OrderItem, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     discount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
