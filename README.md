@@ -1,21 +1,58 @@
 # PROJECT SERVER SIDE
 
 ## CREATE PROJECT AND CREATE ENVIROMENT
-```python
->python mkdir my_projects
+```cmd
+> mkdir my_projects
   
->py -m venv myvenv
+> py -m venv myvenv
   
->myvenv\Scripts\Activate.bat
-  
-
+> myvenv\Scripts\Activate.bat
+```
 ## INSTALL DJANGO AND PSYCOPG2
+```cmd
+> pip install django
+```
+```cmd
+> pip install psycopg2 OR pip install psycopg2-binary
+```
+## GO IN PROJECT 
+```cmd
+> cd my_projects
+```
+```cmd
+> django-admin startproject {project_name}
 
-<pre><code>
->pip install django
-  
->pip install psycopg2
-OR
->pip install psycopg2-binary
+> python manage.py startapp {app_name}
+```
 
-</code></pre>
+## START SERVER
+```cmd
+> python manage.py runserver
+```
+<br><br><br>
+
+## SETTING.py
+```python
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "{database_name}",
+        "USER": "postgres",
+        "PASSWORD": "password",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
+}
+```
+```python
+INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "{app_name}",
+    "{extensions...}",
+]
+```
